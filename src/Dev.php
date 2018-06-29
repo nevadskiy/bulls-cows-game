@@ -1,29 +1,53 @@
 <?php
 
 use CommandLoop\LoopFactory;
-use CommandLoop\Stty;
 use CLI\ConsoleFactory;
-use CLI\Outputs\Select;
+use Outputs\Select;
 
-use PhpSchool\Terminal\UnixTerminal;
-use PhpSchool\Terminal\IO\ResourceInputStream;
-use PhpSchool\Terminal\IO\ResourceOutputStream;
 use CLI\Console;
+use CLI\KeyListener;
+use CommandLoop\Loop;
 
 class Dev
 {
     public function __construct()
     {
-//        LoopFactory::makeSttyLoop();
         $console = Console::make();
-        $console->config()->disableEcho();
-        $console->config()->enableRealtime();
 
-        $char = $console->read();
+//        (new KeyListener($console))
+//            ->add(65, function() {
+//                echo 'GET DOWN';
+//
+//                return true;
+//            })
+//            ->run();
 
-        echo $char, "\n";
+        (new Select\Menu($console))
+            ->addOption(new Select\Option('First option', function() {
 
-        $console->config()->disableRealtime();
+            }))
+            ->addOption(new Select\Option('Second option', function() {
+
+            }))
+            ->show();
+
+//        $console->config()->disableEcho();
+
+//        $console->config()->enableRealtime();
+
+//
+//        Loop::init(function() use ($console) {
+//            $char = $console->read();
+//
+//            $char = ord($char);
+//
+//            echo $char, "\n";
+//
+//            return true;
+//        });
+
+
+//        $console->config()->disableRealtime();
 
 //        $console->config()->disableEcho();
 //        $console->config()->disableEcho();
@@ -43,19 +67,19 @@ class Dev
 
 
 
-        $loop = new Stty(function($key) use ($console) {
-            if ($key === 68) {
-                $console->clear();
-//                $console->write('Clear');
-                $console->move()->toLine(1);
-//                $terminal->moveCursorToRow(0);
-            } else if ($key === 67) {
-//                $terminal->moveCursorToRow(1);
-//            } else if ($key === 66) {
-//                $console->read(10);
-            } else {
-                echo "Char: {$key}\n";
-            }
-        });
+//        $loop = new Stty(function($key) use ($console) {
+//            if ($key === 68) {
+//                $console->clear();
+////                $console->write('Clear');
+//                $console->move()->toLine(1);
+////                $terminal->moveCursorToRow(0);
+//            } else if ($key === 67) {
+////                $terminal->moveCursorToRow(1);
+////            } else if ($key === 66) {
+////                $console->read(10);
+//            } else {
+//                echo "Char: {$key}\n";
+//            }
+//        });
     }
 }
