@@ -12,7 +12,7 @@ class Menu
 
     protected $options = [];
 
-    protected $title;
+    protected $title = '';
 
     public function __construct(Console $console)
     {
@@ -35,9 +35,7 @@ class Menu
 
     public function show()
     {
-        $this->console->config()->enableRealtime();
-        $this->console->config()->disableEcho();
-        $this->console->config()->disableCursor();
+        $this->prepareConsole();
 
         $this->activateIndex(0);
 
@@ -49,13 +47,26 @@ class Menu
     {
         $this->console->clear();
 
-        $output = '';
+        $output = $this->renderTitle();
+        $output .= $this->renderSeparator();
 
         foreach ($this->options as $option) {
             $output .= $option->render() . "\n";
         }
 
         $this->console->write($output);
+    }
+
+    protected function renderSeparator()
+    {
+        $length = $this->title ? mb_strlen($this->title) + 4 : 0;
+
+        return ($output = str_repeat('-', $length)) ? $output . "\n": '';
+    }
+
+    protected function renderTitle()
+    {
+        return $this->title . "\n";
     }
 
     protected function activeUp()
@@ -69,7 +80,7 @@ class Menu
         $this->activeType('down');
     }
 
-    public function activeType(string $type)
+    protected function activeType(string $type)
     {
         for ($i = 0, $count = \count($this->options); $i < $count; $i++) {
 
@@ -103,24 +114,50 @@ class Menu
         $this->options[$index]->activate();
     }
 
-    public function addListeners()
+    protected function selectActive()
+    {
+        foreach ($this->options as $option) {
+            if (!$option->isActive()) {
+                continue;
+            }
+
+            $option->select();
+            $this->restoreConsole();
+        }
+    }
+
+    protected function prepareConsole()
+    {
+        $this->console->config()->enableRealtime();
+        $this->console->config()->disableEcho();
+        $this->console->config()->disableCursor();
+    }
+
+    protected function restoreConsole()
+    {
+        $this->console->config()->disableRealtime();
+        $this->console->config()->enableCursor();
+        $this->console->config()->enableEcho();
+    }
+
+    protected function addListeners()
     {
         (new KeyListener($this->console))
             ->add(Controls::$keymaps['UP'], function() {
-
                 $this->activeUp();
                 $this->render();
 
                 return true;
             })
             ->add(Controls::$keymaps['DOWN'], function() {
-
                 $this->activeDown();
                 $this->render();
 
                 return true;
             })
-            // Add enter key button
+            ->add(Controls::$keymaps['ENTER'], function() {
+                $this->selectActive();
+            })
             ->run();
     }
 }

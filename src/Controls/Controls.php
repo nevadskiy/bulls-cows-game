@@ -9,5 +9,6 @@ class Controls
         'DOWN' => 66,
         'RIGHT' => 67,
         'LEFT' => 68,
+        'ENTER' => 10,
     ];
 }

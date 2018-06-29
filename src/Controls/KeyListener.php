@@ -32,7 +32,6 @@ class KeyListener
         while ($this->shouldCountinue) {
             $char = $this->console->read();
             $ascii = \ord($char);
-            echo $ascii;
 
             if (isset($this->controls[$ascii])) {
                 $this->shouldCountinue = $this->controls[$ascii]();

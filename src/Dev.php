@@ -23,11 +23,12 @@ class Dev
 //            ->run();
 
         (new Select\Menu($console))
+            ->addTitle('Select type')
             ->addOption(new Select\Option('First option', function() {
-
+                echo 'FIRST';
             }))
             ->addOption(new Select\Option('Second option', function() {
-
+                echo 'SECOND';
             }))
             ->show();
 
