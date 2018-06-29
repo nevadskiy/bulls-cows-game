@@ -1,5 +1,7 @@
 <?php
 
+namespace Game;
+
 class Player
 {
     protected $name;

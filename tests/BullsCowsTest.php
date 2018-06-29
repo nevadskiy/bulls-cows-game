@@ -1,5 +1,10 @@
 <?php
 
+use Game\BullsCows;
+use Game\Player;
+use Game\Combination;
+use Game\Response;
+
 class BullsCowsTest extends \PHPUnit\Framework\TestCase
 {
     protected $player;

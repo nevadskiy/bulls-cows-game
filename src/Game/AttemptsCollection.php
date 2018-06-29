@@ -1,5 +1,7 @@
 <?php
 
+namespace Game;
+
 class AttemptsCollection
 {
     protected $stack = [];

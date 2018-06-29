@@ -1,5 +1,7 @@
 <?php
 
+use Game\Combination;
+
 class CombinationTest extends \PHPUnit\Framework\TestCase
 {
     /** @test */

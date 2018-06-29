@@ -1,5 +1,8 @@
 <?php
 
+use Game\Combination;
+use Game\ComboGenerator;
+
 class ComboGeneratorTest extends \PHPUnit\Framework\TestCase
 {
     /** @test */

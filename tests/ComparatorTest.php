@@ -1,5 +1,8 @@
 <?php
 
+use Game\Comparator;
+use Game\Combination;
+
 class ComparatorTest extends \PHPUnit\Framework\TestCase
 {
     /** @test */

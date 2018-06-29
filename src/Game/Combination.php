@@ -1,5 +1,7 @@
 <?php
 
+namespace Game;
+
 /**
  * Class Combination
  */
@@ -17,7 +19,7 @@ class Combination
     public function __construct(string $combo)
     {
         if ($this->hasWrongFormat($combo)) {
-            throw new InvalidArgumentException('Wrong combo '.$combo.' has been specified');
+            throw new \InvalidArgumentException('Wrong combo '.$combo.' has been specified');
         }
 
         $this->combo = $combo;

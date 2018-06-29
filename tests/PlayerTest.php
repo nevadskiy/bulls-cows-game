@@ -1,5 +1,9 @@
 <?php
 
+use Game\BullsCows;
+use Game\Player;
+use Game\Combination;
+
 class PlayerTest extends \PHPUnit\Framework\TestCase
 {
     /** @test */
