@@ -121,6 +121,7 @@ class Menu
                 continue;
             }
 
+            $this->console->clear();
             $option->select();
             $this->restoreConsole();
         }
