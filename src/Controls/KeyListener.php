@@ -6,7 +6,7 @@ use CLI\Console;
 
 class KeyListener
 {
-    protected $shouldCountinue = true;
+    protected $shouldContinue = true;
 
     protected $console;
 
@@ -29,12 +29,12 @@ class KeyListener
 
     public function run(callable $default = null)
     {
-        while ($this->shouldCountinue) {
+        while ($this->shouldContinue) {
             $char = $this->console->read();
             $ascii = \ord($char);
 
             if (isset($this->controls[$ascii])) {
-                $this->shouldCountinue = $this->controls[$ascii]();
+                $this->shouldContinue = $this->controls[$ascii]();
             } else if ($default) {
                 $default($char);
             }
